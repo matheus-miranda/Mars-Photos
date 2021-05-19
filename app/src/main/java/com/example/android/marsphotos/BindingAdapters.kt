@@ -3,7 +3,10 @@ package com.example.android.marsphotos
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.android.marsphotos.network.MarsPhoto
+import com.example.android.marsphotos.overview.PhotoGridAdapter
 
 /**
  * The @BindingAdapter annotation tells data binding to execute this binding adapter
@@ -20,4 +23,10 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             error(R.drawable.ic_broken_image) // Image to use if image loading fails.
         }
     }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsPhoto>?) {
+    val adapter = recyclerView.adapter as PhotoGridAdapter
+    adapter.submitList(data) // Informs RecyclerVIew when a new list is available.
 }

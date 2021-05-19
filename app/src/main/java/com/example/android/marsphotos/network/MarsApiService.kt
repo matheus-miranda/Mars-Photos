@@ -16,15 +16,15 @@ private val retrofit = Retrofit.Builder()
  */
 interface MarsApiService {
     @GET ("photos") // Retrieve the endpoint "photos".
-    fun getPhotos(): String
+    suspend fun getPhotos(): String
 }
 
-// Singleton object since app needs only one instance of Retrofit API service.
+/**
+ * Singleton object since app needs only one instance of Retrofit API service.
+ */
 object MarsApi {
-    // Lazy initialization, to make sure it is initialized at its first usage.
+    // Lazy initialization so object creation is purposely delayed until it's actually needed.
     val retrofitService: MarsApiService by lazy {
         retrofit.create(MarsApiService::class.java)
     }
-
-
 }
